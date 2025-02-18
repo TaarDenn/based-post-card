@@ -1,10 +1,25 @@
-import MainApp from "./main-app";
-
-const appUrl = process.env.NEXT_PUBLIC_URL;
+import Frame from "./frame";
 
 export const revalidate = 300;
 
+const appUrl = process.env.NEXT_PUBLIC_URL;
+const frameUrl = `${appUrl}/frame`;
 const ogImageUrl = `${appUrl}/open-graph/og.png`;
+
+const frame = {
+  version: "next",
+  imageUrl: ogImageUrl,
+  button: {
+    title: "Launch Post-card.fun",
+    action: {
+      type: "launch_frame",
+      name: "POST your handcrafted NFT to a fren!",
+      url: frameUrl,
+      splashImageUrl: `${appUrl}/splash.png`,
+      splashBackgroundColor: "#f7f7f7",
+    },
+  },
+};
 
 export async function generateMetadata() {
   return {
@@ -31,9 +46,12 @@ export async function generateMetadata() {
       creator: "@taardenn",
       images: [ogImageUrl], // Must be an absolute URL
     },
+    other: {
+      "fc:frame": JSON.stringify(frame),
+    },
   };
 }
 
-export default function Home() {
-  return <MainApp />;
+export default function Page() {
+  return <Frame />;
 }
