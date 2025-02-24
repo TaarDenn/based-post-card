@@ -1,6 +1,8 @@
 import FrameApp from "@/components/frame-app";
 
 export const revalidate = 300;
+const appUrl = process.env.NEXT_PUBLIC_URL;
+const ogImageUrl = `${appUrl}/open-graph/og.png`;
 
 const frame = {
   version: "next",
