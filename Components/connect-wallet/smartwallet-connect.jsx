@@ -1,6 +1,6 @@
 import { useCallback } from "react";
 import { useConnect } from "wagmi";
-import SmartWalletLogo from "./SmartWalletLogo";
+import SmartWalletLogo from "./smartwallet-logo";
 
 export default function ConnectSmartWallet() {
   const { connectors, connect } = useConnect();

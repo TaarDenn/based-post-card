@@ -1,6 +1,6 @@
 import { useChains } from "wagmi";
 import { useAccount } from "wagmi";
-import ConnectWalletBar from "./ConnectWallet/ConnectWalletBar";
+import ConnectWalletBar from "./connect-wallet/connect-wallet-bar";
 
 export default function Web3Button({ children, className, ...props }) {
   const chains = useChains();

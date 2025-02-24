@@ -1,6 +1,10 @@
-@tailwind base;
+/* @tailwind base;
 @tailwind components;
-@tailwind utilities;
+@tailwind utilities; */
+
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
 
 @layer base {
   @font-face {
@@ -8,10 +12,11 @@
     src: url("/BasePixel-LowResolution.woff2");
   }
 }
+
 @layer utilities {
-.pixel-font {
-  font-family: BasePixel;
-}
+  .pixel-font {
+    font-family: BasePixel;
+  }
 }
 
 .color-picker .react-colorful {
@@ -34,4 +39,10 @@
 .color-picker .react-colorful__hue {
   height: 20px;
   border-radius: 0;
+}
+
+.styled-scrollbar {
+  scrollbar-width: thin;
+  scrollbar-color: #eaeaea #ffffff00;
+  scrollbar-gutter: stable;
 }

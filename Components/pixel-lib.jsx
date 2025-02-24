@@ -1,12 +1,12 @@
 import { pixelLib } from "@/lib/pixelLibrary";
-import CanvasViewer from "./CanvasViewer";
+import CanvasViewer from "./canvas-viewer";
 import { createPortal } from "react-dom";
 
 export default function PixelLib({ show, onClose, setter }) {
   if (!show) return false;
 
   return createPortal(
-    <div className="fixed top-0 left-0 w-full h-[100dvh] bg-black/70 pixel-font z-30 flex items-center jusitfy-center p-2">
+    <div className="pixel-font fixed top-0 left-0 w-full h-[100svh] overflow-y-auto bg-black/70 styled-scrollbar z-50 flex items-center jusitfy-center p-2">
       <div className="w-full max-w-[700px] mx-auto h-full bg-white border border-black p-2 flex flex-col items-center">
         <div className="flex w-full items-center bg-[#0052FF] pl-2 text-white">
           <h1 className="w-full flex-auto text-start">CHOOSE OR INSPIRE</h1>

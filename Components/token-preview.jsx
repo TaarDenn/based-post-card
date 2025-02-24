@@ -42,7 +42,7 @@ export default function TokenPreview({ data }) {
           backgroundColor: data.bg,
           height: `${previewHeight}px`,
         }}
-        className="relative border border-black w-full max-w-[400px]"
+        className="relative border border-black w-full"
       >
         {data.inputs.map((inp, i) => (
           <Draggable

@@ -11,7 +11,7 @@ import {
   parseEther,
 } from "viem";
 
-import ConnectWalletBar from "./ConnectWallet/ConnectWalletBar";
+import ConnectWalletBar from "./connect-wallet/connect-wallet-bar";
 
 export default function DonationModal({ show, onClose }) {
   const {
@@ -90,7 +90,7 @@ export default function DonationModal({ show, onClose }) {
   };
 
   return createPortal(
-    <div className="fixed top-0 left-0 w-full h-[100dvh] pixel-font bg-black/70 z-30 flex items-center jusitfy-center p-2">
+    <div className="pixel-font fixed top-0 left-0 w-full h-[100svh] overflow-y-auto bg-black/70 styled-scrollbar z-50 flex items-center jusitfy-center p-2">
       <div className="w-full max-w-[700px] mx-auto h-full max-h-[500px] bg-white border border-black p-2 flex flex-col items-center">
         <div className="flex w-full items-center bg-[#0052FF] pl-2 text-white">
           <h1 className="w-full flex-auto text-start">SUPPORT DEV</h1>

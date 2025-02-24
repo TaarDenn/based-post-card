@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useReadContracts, useAccount } from "wagmi";
 import { contract } from "@/contract/contract";
-import TokenPreview from "./TokenPreview";
+import TokenPreview from "./token-preview";
 import { convertTokenToPreviewData } from "@/lib/utils";
 import { createPortal } from "react-dom";
 
@@ -11,7 +11,7 @@ export default function PortfolioModal({ show, onClose, setter }) {
   if (!show) return false;
 
   return createPortal(
-    <div className="fixed top-0 left-0 w-full h-[100dvh] bg-black/70 z-30 pixel-font flex items-center jusitfy-center p-2">
+    <div className="pixel-font fixed top-0 left-0 w-full h-[100svh] overflow-y-auto bg-black/70 styled-scrollbar z-50 flex items-center jusitfy-center p-2">
       <div className="w-full max-w-[700px] mx-auto h-full bg-white border border-black p-2">
         <div className="flex w-full items-center bg-[#0052FF] pl-2 text-white">
           <h1 className="w-full flex-auto text-start">INBOX</h1>

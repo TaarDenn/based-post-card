@@ -1,6 +1,6 @@
 import { useAccount } from "wagmi";
-import ConnectRegularWallet from "./ConnectRegularWallet";
-import ConnectSmartWallet from "./SmartWalletConnect";
+import ConnectRegularWallet from "./connect-regular-wallet";
+import ConnectSmartWallet from "./smartwallet-connect";
 
 export default function ConnectWalletBar() {
   const { isConnected } = useAccount();
