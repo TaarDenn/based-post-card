@@ -15,10 +15,10 @@ const config = createConfig(
       [baseSepolia.id]: http(),
     },
     walletConnectProjectId: process.env.NEXT_PUBLIC_WALLETCONNECT_PROJECT_ID,
-    appName: "Based Gift",
-    appDescription: "Gift yourr hand-crafted NFT to your fren!",
-    appUrl: "https://BasedGift.xyz",
-    appIcon: "https://family.co/logo.png",
+    appName: "PostCard",
+    appDescription: "Post your hand-crafted NFT to a fren!",
+    appUrl: "https://post-card.fun",
+    appIcon: "https://post-card.fun/splash/splash.png",
   })
 );
 
