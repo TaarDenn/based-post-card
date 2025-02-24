@@ -1,4 +1,4 @@
-'use client'
+"use client";
 
 import { useState, useLayoutEffect, useRef, useEffect, use } from "react";
 import Draggable from "react-draggable";
@@ -10,6 +10,7 @@ import DonationModal from "@/Components/DonationModal";
 import PortfolioModal from "@/Components/Portfolio";
 import { getWidth, hexColorToRgb } from "@/lib/utils";
 import PixelLib from "@/Components/PixelLib";
+import Footer from "@/Components/Footer/footer";
 
 const aspectRatio = 6 / 4;
 
@@ -446,13 +447,13 @@ export default function BasedGift() {
               <div
                 role="toolbar"
                 aria-orientation="horizontal"
-                className="px-2 py-2 border-t border-black flex flex-wrap justify-between text-sm"
+                className="px-2 text-xs py-2 border-t border-black flex flex-wrap justify-between text-sm"
               >
                 <button
                   className="border border-black px-2 w-1/2 hover:bg-blue-200"
                   onClick={() => setShowPortfolio(true)}
                 >
-                  My Gift Portfolio
+                  My Inbox
                 </button>
 
                 <button
@@ -469,9 +470,10 @@ export default function BasedGift() {
                 className="w-full bg-[#0052FF] text-white flex justify-center p-2 hover:bg-[#0052FF]/80"
                 onClick={() => setShowModal(true)}
               >
-                SEND GIFT
+                POST to fren
               </button>
             </div>
+            <Footer />
           </div>
           <div className="relative">
             <button

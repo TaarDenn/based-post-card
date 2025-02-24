@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { contract } from "@/contract/contract";
-
+import { createPortal } from "react-dom";
 import { useWriteContract, useWaitForTransactionReceipt } from "wagmi";
 import { config } from "@/providers/wagmi";
 import { simulateContract } from "@wagmi/core";
@@ -30,15 +30,10 @@ export default function DonationModal({ show, onClose }) {
   const [simulationError, setSimulationError] = useState("");
   const [isSimulating, setSimulating] = useState(false);
   const [showError, setShowError] = useState(false);
-  const [thankyou, sayThankyou] = useState(false);
 
   useEffect(() => {
     if (isError) setShowError(true);
   }, [isError]);
-
-  useEffect(() => {
-    if (isConfirmed) sayThankyou(true);
-  }, [isConfirmed]);
 
   if (!show) return false;
 
@@ -94,9 +89,9 @@ export default function DonationModal({ show, onClose }) {
     }
   };
 
-  return (
-    <div className="fixed w-full h-full bg-black/70 z-20 flex items-center jusitfy-center p-4">
-      <div className="w-full max-w-[700px] mx-auto h-full max-h-[500px] bg-white border border-black p-4 flex flex-col items-center">
+  return createPortal(
+    <div className="fixed top-0 left-0 w-full h-[100dvh] pixel-font bg-black/70 z-30 flex items-center jusitfy-center p-2">
+      <div className="w-full max-w-[700px] mx-auto h-full max-h-[500px] bg-white border border-black p-2 flex flex-col items-center">
         <div className="flex w-full items-center bg-[#0052FF] pl-2 text-white">
           <h1 className="w-full flex-auto text-start">SUPPORT DEV</h1>
           <button className="p-2 hover:bg-white/20" onClick={onClose}>
@@ -113,21 +108,24 @@ export default function DonationModal({ show, onClose }) {
             </h2>
             <div className="flex w-full gap-2 justify-center">
               <button
+                disabled={isSimulating}
                 onClick={() => donate("0.00001")}
-                className="text-xs bg-[#0052ff] shadow-[3px_3px] shadow-black transition-all duration-200 hover:shadow-none text-white w-24 p-2 hover:bg-[#0052ff]/80"
+                className="disabled:text-zinc-300 text-xs bg-[#0052ff] shadow-[3px_3px] shadow-black transition-all duration-200 hover:shadow-none text-white w-24 p-2 hover:bg-[#0052ff]/80"
               >
                 0.0005 ETH
               </button>
               <button
+                disabled={isSimulating}
                 onClick={() => donate("0.005")}
-                className="text-xs  bg-[#0052ff] shadow-[3px_3px] shadow-black transition-all duration-200 hover:shadow-none text-white w-24 p-2 hover:bg-[#0052ff]/80"
+                className="disabled:text-zinc-300 text-xs bg-[#0052ff] shadow-[3px_3px] shadow-black transition-all duration-200 hover:shadow-none text-white w-24 p-2 hover:bg-[#0052ff]/80"
               >
                 0.005 ETH
               </button>
 
               <button
+                disabled={isSimulating}
                 onClick={() => donate("0.05")}
-                className=" text-xs bg-[#0052ff] shadow-[3px_3px] shadow-black transition-all duration-200 hover:shadow-none text-white w-24 p-2 hover:bg-[#0052ff]/80"
+                className="disabled:text-zinc-300 text-xs bg-[#0052ff] shadow-[3px_3px] shadow-black transition-all duration-200 hover:shadow-none text-white w-24 p-2 hover:bg-[#0052ff]/80"
               >
                 0.05 ETH
               </button>
@@ -196,6 +194,7 @@ export default function DonationModal({ show, onClose }) {
           </div>
         </div>
       </div>
-    </div>
+    </div>,
+    document.body
   );
 }

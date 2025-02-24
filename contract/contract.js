@@ -1,6 +1,6 @@
 export const font = "0xEf3231434bF67a942c73A5721fC15798d1379616";
 export const contract = {
-  address: "0x4e1F714d6C467bD0594beBfDE3f4c8F0c53b5395",
+  address: "0x5F6dd5dADD6af656EdCdb94EDeBBBF6846F2Ef1d",
   abi: [
     {
       inputs: [],
@@ -59,7 +59,7 @@ export const contract = {
     },
     {
       inputs: [],
-      name: "OutOfGift",
+      name: "OutOfPostcards",
       type: "error",
     },
     {
@@ -234,6 +234,25 @@ export const contract = {
       anonymous: false,
       inputs: [
         {
+          indexed: true,
+          internalType: "address",
+          name: "previousOwner",
+          type: "address",
+        },
+        {
+          indexed: true,
+          internalType: "address",
+          name: "newOwner",
+          type: "address",
+        },
+      ],
+      name: "OwnershipTransferred",
+      type: "event",
+    },
+    {
+      anonymous: false,
+      inputs: [
+        {
           indexed: false,
           internalType: "address",
           name: "sender",
@@ -252,26 +271,7 @@ export const contract = {
           type: "uint256",
         },
       ],
-      name: "GiftSent",
-      type: "event",
-    },
-    {
-      anonymous: false,
-      inputs: [
-        {
-          indexed: true,
-          internalType: "address",
-          name: "previousOwner",
-          type: "address",
-        },
-        {
-          indexed: true,
-          internalType: "address",
-          name: "newOwner",
-          type: "address",
-        },
-      ],
-      name: "OwnershipTransferred",
+      name: "Posted",
       type: "event",
     },
     {
@@ -523,7 +523,7 @@ export const contract = {
           type: "uint256",
         },
       ],
-      name: "getRawGift",
+      name: "getRawCard",
       outputs: [
         {
           components: [
@@ -565,7 +565,7 @@ export const contract = {
                   type: "uint256",
                 },
               ],
-              internalType: "struct BasedGift.Position",
+              internalType: "struct BasedPostCard.Position",
               name: "pixelCanvasPosition",
               type: "tuple",
             },
@@ -582,7 +582,7 @@ export const contract = {
                   type: "uint256",
                 },
               ],
-              internalType: "struct BasedGift.Position[3]",
+              internalType: "struct BasedPostCard.Position[3]",
               name: "textPositions",
               type: "tuple[3]",
             },
@@ -597,7 +597,7 @@ export const contract = {
               type: "address",
             },
           ],
-          internalType: "struct BasedGift.Gift",
+          internalType: "struct BasedPostCard.Card",
           name: "",
           type: "tuple",
         },
@@ -613,7 +613,7 @@ export const contract = {
           type: "address",
         },
       ],
-      name: "getRecievedGiftsOf",
+      name: "getRecievedCardsOf",
       outputs: [
         {
           components: [
@@ -655,7 +655,7 @@ export const contract = {
                   type: "uint256",
                 },
               ],
-              internalType: "struct BasedGift.Position",
+              internalType: "struct BasedPostCard.Position",
               name: "pixelCanvasPosition",
               type: "tuple",
             },
@@ -672,7 +672,7 @@ export const contract = {
                   type: "uint256",
                 },
               ],
-              internalType: "struct BasedGift.Position[3]",
+              internalType: "struct BasedPostCard.Position[3]",
               name: "textPositions",
               type: "tuple[3]",
             },
@@ -687,7 +687,7 @@ export const contract = {
               type: "address",
             },
           ],
-          internalType: "struct BasedGift.Gift[]",
+          internalType: "struct BasedPostCard.Card[]",
           name: "",
           type: "tuple[]",
         },
@@ -703,7 +703,7 @@ export const contract = {
           type: "address",
         },
       ],
-      name: "getSentGiftsOf",
+      name: "getSentCardsOf",
       outputs: [
         {
           components: [
@@ -745,7 +745,7 @@ export const contract = {
                   type: "uint256",
                 },
               ],
-              internalType: "struct BasedGift.Position",
+              internalType: "struct BasedPostCard.Position",
               name: "pixelCanvasPosition",
               type: "tuple",
             },
@@ -762,7 +762,7 @@ export const contract = {
                   type: "uint256",
                 },
               ],
-              internalType: "struct BasedGift.Position[3]",
+              internalType: "struct BasedPostCard.Position[3]",
               name: "textPositions",
               type: "tuple[3]",
             },
@@ -777,7 +777,7 @@ export const contract = {
               type: "address",
             },
           ],
-          internalType: "struct BasedGift.Gift[]",
+          internalType: "struct BasedPostCard.Card[]",
           name: "",
           type: "tuple[]",
         },
@@ -854,7 +854,7 @@ export const contract = {
               type: "uint256",
             },
           ],
-          internalType: "struct BasedGift.Position",
+          internalType: "struct BasedPostCard.Position",
           name: "_pixelCanvasPosition",
           type: "tuple",
         },
@@ -871,7 +871,7 @@ export const contract = {
               type: "uint256",
             },
           ],
-          internalType: "struct BasedGift.Position[3]",
+          internalType: "struct BasedPostCard.Position[3]",
           name: "_textPositions",
           type: "tuple[3]",
         },
@@ -886,7 +886,7 @@ export const contract = {
           type: "uint256",
         },
       ],
-      name: "mintAndSendGift",
+      name: "mintAndPost",
       outputs: [],
       stateMutability: "payable",
       type: "function",

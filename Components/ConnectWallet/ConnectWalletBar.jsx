@@ -5,7 +5,7 @@ import ConnectSmartWallet from "./SmartWalletConnect";
 export default function ConnectWalletBar() {
   const { isConnected } = useAccount();
   return (
-    <div className="text-lg flex gap-2 justify-center w-full py-2 text-xs">
+    <div className="text-lg flex gap-2 justify-center w-full py-2 last:pb-0 text-xs">
       <div className={isConnected ? "w-1/2 h-8" : "w-1/2 h-8"}>
         <ConnectRegularWallet />
       </div>

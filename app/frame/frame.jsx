@@ -16,6 +16,7 @@ export default function Frame() {
       load();
     }
   }, [isSDKLoaded]);
+  
   return (
     <main className="pixel-font">
       <Wagmi>

@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { createPortal } from "react-dom";
 import { contract } from "@/contract/contract";
 import { NumericFormat } from "react-number-format";
 import {
@@ -48,7 +49,7 @@ export default function MintModal({ show, onClose, data, openDonationModal }) {
   }, [isConfirmed]);
 
   if (!show) return false;
-  
+
   const handleChangeWallet = (val) => setWallet(val);
 
   const mint = async () => {
@@ -77,7 +78,7 @@ export default function MintModal({ show, onClose, data, openDonationModal }) {
     try {
       await simulateContract(config, {
         ...contract,
-        functionName: "mintAndSendGift",
+        functionName: "mintAndPost",
         ...functionParams,
       });
 
@@ -85,7 +86,7 @@ export default function MintModal({ show, onClose, data, openDonationModal }) {
 
       writeContract({
         ...contract,
-        functionName: "mintAndSendGift",
+        functionName: "mintAndPost",
         ...functionParams,
       });
     } catch (err) {
@@ -97,7 +98,7 @@ export default function MintModal({ show, onClose, data, openDonationModal }) {
 
       if (insufficientFundsError instanceof InsufficientFundsError) {
         setSimulationError(
-          `You don't have "${eth}" ETH to send with this gift`
+          `You don't have "${eth}" ETH to post with this card`
         );
       }
 
@@ -113,18 +114,20 @@ export default function MintModal({ show, onClose, data, openDonationModal }) {
 
         if (errorName === "LowEth") {
           setSimulationError("You didn't send enough ETH to the contract");
-        } else if (errorName === "OutOfGift") {
-          setSimulationError("All gifts are sent out!");
+        } else if (errorName === "OutOfPostcards") {
+          setSimulationError("All Postcards are sent out!");
+        } else {
+          setSimulationError("Something happened! please try again later!");
         }
       }
     }
   };
 
-  return (
-    <div className="fixed w-full h-[100dvh] overflow-y-auto bg-black/70 z-20 flex items-center jusitfy-center p-4">
-      <div className="w-full max-w-[700px] mx-auto h-full bg-white border border-black p-4 flex flex-col items-center">
+  return createPortal(
+    <div className="pixel-font fixed top-0 left-0 w-full h-[100dvh] overflow-y-auto bg-black/70 z-30 flex items-center jusitfy-center p-2">
+      <div className="w-full max-w-[700px] mx-auto h-full bg-white border border-black p-2 flex flex-col items-center">
         <div className="flex w-full items-center bg-[#0052FF] pl-2 text-white">
-          <h1 className="w-full flex-auto text-start">SEND GIFT</h1>
+          <h1 className="w-full flex-auto text-start">POST to fren</h1>
           <button className="p-2 hover:bg-white/20" onClick={onClose}>
             x
           </button>
@@ -175,7 +178,7 @@ export default function MintModal({ show, onClose, data, openDonationModal }) {
         </div>
         <div className="w-full py-2 flex justify-center items-center">
           <Web3Button
-            disabled={isPending || !isConnected}
+            disabled={isPending || !isConnected || isSimulating}
             onClick={() => mint()}
             // onClick={() => openDonationModal(true)}
           >
@@ -216,6 +219,7 @@ export default function MintModal({ show, onClose, data, openDonationModal }) {
           <div className="text-rose-500">Error: {simulationError}</div>
         )}
       </div>
-    </div>
+    </div>,
+    document.body
   );
 }

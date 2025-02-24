@@ -11,7 +11,7 @@ export default function Web3Button({ children, className, ...props }) {
 
   return (
     <button
-      className={`w-full px-2 py-1 bg-[#0052FF] hover:bg-[#0052FF]/80 text-white ${className}`}
+      className={`disabled:bg-zinc-300 w-full px-2 py-1 bg-[#0052FF] hover:bg-[#0052FF]/80 text-white ${className}`}
       {...props}
     >
       {children}
