@@ -73,7 +73,7 @@ export default function MintModal({ show, onClose, data, openDonationModal }) {
 
     setSimulating(true);
 
-    const functionParams = createMintArgs(wallet, name, data, eth, 0);
+    const functionParams = createMintArgs(wallet, name, data, eth, "0.0005");
 
     try {
       await simulateContract(config, {

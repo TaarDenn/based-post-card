@@ -1,4 +1,4 @@
-import Frame from "./frame";
+import Frame from "@/components/frame";
 
 export const revalidate = 300;
 
@@ -15,8 +15,8 @@ const frame = {
       type: "launch_frame",
       name: "POST your handcrafted NFT to a fren!",
       url: frameUrl,
-      splashImageUrl: `${appUrl}/splash.png`,
-      splashBackgroundColor: "#f7f7f7",
+      splashImageUrl: `${appUrl}/splash/splash.png`,
+      splashBackgroundColor: "#0052ff",
     },
   },
 };

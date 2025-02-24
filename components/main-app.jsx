@@ -1,11 +1,7 @@
 "use client";
 
-// import dynamic from "next/dynamic";
 import BasedGift from "@/components/based-gift";
 import Wagmi from "@/providers/wagmi-provider";
-// const LazyWagmi = dynamic(() => import("../providers/wagmi-provider"), {
-//   ssr: false,
-// });
 
 export default function MainApp() {
   return (

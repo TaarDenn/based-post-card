@@ -1,13 +1,8 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import BasedGift from "@/components/based-gift";
 import sdk from "@farcaster/frame-sdk";
-// import dynamic from "next/dynamic";
-import Wagmi from "@/providers/wagmi-provider";
-// const LazyWagmi = dynamic(() => import("../providers/wagmi-provider"), {
-//   ssr: false,
-// });
+import MainApp from "./main-app";
 
 export default function Frame() {
   const [isSDKLoaded, setIsSDKLoaded] = useState(false);
@@ -22,11 +17,5 @@ export default function Frame() {
     }
   }, [isSDKLoaded]);
 
-  return (
-    <main className="pixel-font h-[100svh]">
-      <Wagmi>
-        <BasedGift />
-      </Wagmi>
-    </main>
-  );
+  return <MainApp />;
 }
