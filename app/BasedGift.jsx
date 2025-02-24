@@ -1,20 +1,20 @@
 "use client";
 
-import { useState, useLayoutEffect, useRef, useEffect, use } from "react";
+import { useState, useLayoutEffect, useRef, useEffect } from "react";
 import Draggable from "react-draggable";
 import { HexColorPicker, HexColorInput } from "react-colorful";
-import { defaultCanvas as dcr } from "@/lib/defaultCanvas";
+import { defaultCanvas as defaultCanvasReference } from "@/lib/defaultCanvas";
 import MintModal from "@/Components/MintModal";
 import Navbar from "@/Components/Navbar";
 import DonationModal from "@/Components/DonationModal";
 import PortfolioModal from "@/Components/Portfolio";
 import { getWidth, hexColorToRgb } from "@/lib/utils";
 import PixelLib from "@/Components/PixelLib";
-import Footer from "@/Components/Footer/footer";
+import Footer from "@/Components/footer";
 
 const aspectRatio = 6 / 4;
 
-const dc = structuredClone(dcr);
+const dc = structuredClone(defaultCanvasReference);
 
 export default function BasedGift() {
   const [bytes, setBytes] = useState(dc.bytes);
