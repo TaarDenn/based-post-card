@@ -1,6 +1,6 @@
 "use client";
 
-import BasedGift from "@/a/based-gift";
+import BasedGift from "@/components/based-gift";
 import Wagmi from "@/providers/wagmi-provider";
 
 export default function MainApp() {

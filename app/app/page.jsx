@@ -1,4 +1,4 @@
-import MainApp from "@/a/main-app";
+import MainApp from "@/components/main-app";
 
 const appUrl = process.env.NEXT_PUBLIC_URL;
 const ogImageUrl = `${appUrl}/open-graph/og.png`;
