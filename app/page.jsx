@@ -1,4 +1,4 @@
-import Frame from "@/components/frame";
+import FrameApp from "@/components/frame-app";
 
 export const revalidate = 300;
 
@@ -49,5 +49,5 @@ export async function generateMetadata() {
 }
 
 export default function Page() {
-  return <Frame />;
+  return <FrameApp />;
 }

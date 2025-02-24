@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import sdk from "@farcaster/frame-sdk";
 import MainApp from "./main-app";
 
-export default function Frame() {
+export default function FrameApp() {
   const [isSDKLoaded, setIsSDKLoaded] = useState(false);
 
   useEffect(() => {
