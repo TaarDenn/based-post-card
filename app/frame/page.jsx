@@ -1,4 +1,4 @@
-import Frame from "@/components/frame";
+import Frame from "./frame";
 
 export const revalidate = 300;
 

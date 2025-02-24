@@ -1,4 +1,4 @@
-import MainApp from "@/components/main-app";
+import MainApp from "./main-app";
 
 const appUrl = process.env.NEXT_PUBLIC_URL;
 
