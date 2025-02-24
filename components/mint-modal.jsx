@@ -189,6 +189,11 @@ export default function MintModal({ show, onClose, data, openDonationModal }) {
               : "POST CARD"}
           </Web3Button>
         </div>
+        {isConnected && (
+          <p className="text-xs w-full text-center text-zinc-500">
+            with A little 0.0005 eth to support dev
+          </p>
+        )}
         {hash && (
           <div className="break-all text-center text-xs">
             Tx Hash:{" "}
