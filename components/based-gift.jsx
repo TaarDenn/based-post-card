@@ -4,13 +4,13 @@ import { useState, useLayoutEffect, useRef, useEffect } from "react";
 import Draggable from "react-draggable";
 import { HexColorPicker, HexColorInput } from "react-colorful";
 import { defaultCanvas as defaultCanvasReference } from "@/lib/defaultCanvas";
-import MintModal from "@/componentss/mint-modal";
-import Navbar from "@/componentss/navbar";
-import DonationModal from "@/componentss/donation-modal";
-import PortfolioModal from "@/componentss/portfolio";
+import MintModal from "@/components/mint-modal";
+import Navbar from "@/components/navbar";
+import DonationModal from "@/components/donation-modal";
+import PortfolioModal from "@/components/portfolio";
 import { getWidth, hexColorToRgb } from "@/lib/utils";
-import PixelLib from "@/componentss/pixel-lib";
-import Footer from "@/componentss/footer";
+import PixelLib from "@/components/pixel-lib";
+import Footer from "@/components/footer";
 
 const aspectRatio = 6 / 4;
 

@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import BasedGift from "@/componentss/based-gift";
+import BasedGift from "@/components/based-gift";
 import sdk from "@farcaster/frame-sdk";
 // import dynamic from "next/dynamic";
 import Wagmi from "@/providers/wagmi-provider";
