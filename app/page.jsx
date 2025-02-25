@@ -1,17 +1,17 @@
 import FrameApp from "@/components/frame-app";
 
-export const revalidate = 300;
 const appUrl = process.env.NEXT_PUBLIC_URL;
 const ogImageUrl = `${appUrl}/open-graph/og.png`;
+const imageUrl = `${appUrl}/frame-poster/fc.png`;
 
 const frame = {
   version: "next",
-  imageUrl: ogImageUrl,
+  imageUrl: imageUrl,
   button: {
-    title: "Launch Post-card.fun",
+    title: "Post a Card to fren",
     action: {
       type: "launch_frame",
-      name: "POST your handcrafted NFT to a fren!",
+      name: "PostCard.fun",
       url: appUrl,
       splashImageUrl: `${appUrl}/splash/splash.png`,
       splashBackgroundColor: "#0052ff",
@@ -19,9 +19,12 @@ const frame = {
   },
 };
 
+export const revalidate = 300;
+
 export async function generateMetadata() {
   return {
     title: "Post-Card.fun",
+    description: "Post handcrafted NFTs to frens!",
     openGraph: {
       title: "Post-Card.fun",
       description: "Post handcrafted NFTs to frens!",
