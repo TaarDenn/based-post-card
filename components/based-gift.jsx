@@ -491,7 +491,11 @@ export default function BasedGift({ isFrame = false }) {
               className={`sm:hidden bg-yellow-300 hover:bg-yellow-200 shadow-[5px_5px] fixed w-12 h-20 z-20 border border-black top-0 ${
                 drawerOpen ? "right-[220px] transition-[right]" : "right-0"
               }`}
-              onClick={() => setDrawerOpen(!drawerOpen)}
+              onClick={() => {
+                setDrawerOpen(!drawerOpen);
+                setFirstTap(true);
+                setShowEditor(true);
+              }}
             >
               {drawerOpen ? "Close" : "Tools"}
             </button>
