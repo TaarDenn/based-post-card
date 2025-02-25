@@ -1,7 +1,6 @@
-import FrameApp from "@/components/frame-app-";
+import FrameApp from "@/components/frame-app";
 
 const appUrl = process.env.NEXT_PUBLIC_URL;
-const ogImageUrl = `${appUrl}/open-graph/og.png`;
 const imageUrl = `${appUrl}/frame-poster/fc.png`;
 
 const frame = {
