@@ -2,7 +2,12 @@
 
 import { useState, useEffect } from "react";
 import sdk from "@farcaster/frame-sdk";
-import MainApp from "./main-app";
+import dynamic from "next/dynamic";
+import BasedGift from "./based-gift";
+
+const LazyWagmi = dynamic(() => import("@/providers/wagmi-provider"), {
+  ssr: false,
+});
 
 export default function FrameApp() {
   const [isSDKLoaded, setIsSDKLoaded] = useState(false);
@@ -17,5 +22,11 @@ export default function FrameApp() {
     }
   }, [isSDKLoaded]);
 
-  return <MainApp />;
+  return (
+    <main className="pixel-font h-[100svh]">
+      <LazyWagmi>
+        <BasedGift isFrame={true} />
+      </LazyWagmi>
+    </main>
+  );
 }

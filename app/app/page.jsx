@@ -32,5 +32,5 @@ export async function generateMetadata() {
 }
 
 export default function Home() {
-  return <MainApp />;
+  return <MainApp isFrame={false} />;
 }

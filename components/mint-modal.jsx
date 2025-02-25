@@ -18,7 +18,13 @@ import {
   ContractFunctionExecutionError,
 } from "viem";
 
-export default function MintModal({ show, onClose, data, openDonationModal }) {
+export default function MintModal({
+  show,
+  onClose,
+  data,
+  openDonationModal,
+  isFrame,
+}) {
   const { isConnected } = useAccount();
   const {
     data: hash,
@@ -76,11 +82,13 @@ export default function MintModal({ show, onClose, data, openDonationModal }) {
     const functionParams = createMintArgs(wallet, name, data, eth, "0.0005");
 
     try {
-      await simulateContract(config, {
-        ...contract,
-        functionName: "mintAndPost",
-        ...functionParams,
-      });
+      if (!isFrame) {
+        await simulateContract(config, {
+          ...contract,
+          functionName: "mintAndPost",
+          ...functionParams,
+        });
+      }
 
       setSimulating(false);
 

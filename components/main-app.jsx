@@ -7,7 +7,7 @@ export default function MainApp() {
   return (
     <main className="pixel-font h-[100svh]">
       <Wagmi>
-        <BasedGift />
+        <BasedGift isFrame={false} />
       </Wagmi>
     </main>
   );

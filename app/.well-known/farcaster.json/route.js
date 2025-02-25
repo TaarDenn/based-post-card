@@ -11,7 +11,7 @@ export async function GET() {
     },
     frame: {
       version: "1",
-      name: "Example Frame",
+      name: "PostCard.fun",
       iconUrl: `${appUrl}/icon.png`,
       homeUrl: appUrl,
       imageUrl: `${appUrl}/open-graph/og.png`,

@@ -16,7 +16,7 @@ const aspectRatio = 6 / 4;
 
 const dc = structuredClone(defaultCanvasReference);
 
-export default function BasedGift() {
+export default function BasedGift({ isFrame = false }) {
   const [bytes, setBytes] = useState(dc.bytes);
   const [bg, setBg] = useState(dc.bg);
   const [brush, setBrush] = useState("#ffffff");
@@ -205,12 +205,14 @@ export default function BasedGift() {
     <div className="bg-white w-full h-[100svh] flex justify-center items-center">
       <div className="w-full h-full">
         <MintModal
+          isFrame={isFrame}
           show={showModal}
           onClose={() => setShowModal(false)}
           data={{ bg, bytes, inputs, pixelCanvasPos }}
           openDonationModal={openDonationModal}
         />
         <DonationModal
+          isFrame={isFrame}
           show={showDonationModal}
           onClose={() => setShowDonationModal(false)}
         />
@@ -226,262 +228,263 @@ export default function BasedGift() {
         />
         <div className="w-full flex items-center justify-center sm:w-[calc(100%-220px)] h-[100svh]">
           <div className="h-[100svh] w-[410px] sm:w-full overflow-y-auto flex justify-center styled-scrollbar ">
-          <div id="editor-container" className="flex w-[410px] h-[100svh]">
-            <div
-              id="canvas-container"
-              className="w-full max-w-[410px] mx-auto sm:mx-0"
-            >
-              <Navbar />
-              <div className="w-full border border-black">
-                <div className="p-2">
-                  <div
-                    id="canvas"
-                    ref={canvas}
-                    style={{
-                      backgroundColor: bg,
-                      height: `${canvasHeight}px`,
-                    }}
-                    className="relative border border-black w-full max-w-[400px]"
-                  >
-                    {!firstTap && (
-                      <div
-                        onClick={() => {
-                          setFirstTap(true);
-                          setShowEditor(true);
-                        }}
-                        className="absolute top-0 left-0 w-full h-full z-10"
-                      ></div>
-                    )}
-                    {showEditor && (
-                      <>
-                        <div className="absolute top-0 left-0 flex w-full h-full">
-                          <div
-                            style={{ borderColor: annoColor }}
-                            className="h-full w-1/2 border-r-[1px] border-dashed opacity-30"
-                          ></div>
-                        </div>
-                        <div className="absolute top-0 left-0 flex w-full h-full">
-                          <div
-                            style={{ borderColor: annoColor }}
-                            className="h-1/2 w-full border-b-[1px] border-dashed opacity-30"
-                          ></div>
-                        </div>
-                      </>
-                    )}
-                    {inputs.map((inp, i) => (
-                      <Draggable
-                        key={`text-${i}`}
-                        bounds="parent"
-                        handle=".handle"
-                        onDrag={(_, ui) => handleDragInputs(ui, i)}
-                        onStart={() => setSelectedElement(`text${i}`)}
-                        onStop={() => setDrawDisabled(false)}
-                        nodeRef={textNodesRefs[i]}
-                        position={{
-                          x: inp.x * canvasWidth,
-                          y: inp.y * canvasHeight,
-                        }}
-                      >
-                        <div ref={textNodesRefs[i]} className="absolute">
-                          <Handle
-                            annoColor={annoColor}
-                            show={showEditor}
-                            isRemovable={true}
-                            onRemove={() => removeText(i)}
-                          />
-                          <input
-                            id={`input-${i}`}
-                            onFocus={() => setSelectedElement(`text${i}`)}
-                            style={{
-                              color: inp.color,
-                              width: inp.width,
-                              // With mono width fonts we can something like this
-                              // inp.value.length < 3
-                              //   ? "3ch"
-                              //   : `${inp.value.length}ch`,
-                              fontSize: `${canvasWidth / 20}px`,
-                              outlineWidth: "1px",
-                              outlineStyle:
-                                showEditor && selectedElement === `text${i}`
-                                  ? "dashed"
-                                  : "none",
-                              outlineColor: annoColor,
-                            }}
-                            value={inp.value}
-                            className="bg-inherit"
-                            placeholder={`${showEditor ? "..." : ""}`}
-                            onChange={(e) => onChangeInput(e, i)}
-                          />
-                        </div>
-                      </Draggable>
-                    ))}
-
-                    <Draggable
-                      bounds="parent"
-                      nodeRef={pixelCanvas}
-                      handle=".handle"
-                      onDrag={handleDragPixelCanvas}
-                      onStart={() => setDrawDisabled(true)}
-                      onStop={() => setDrawDisabled(false)}
-                      position={{
-                        x: pixelCanvasPos.x * canvasWidth,
-                        y: pixelCanvasPos.y * canvasHeight,
+            <div id="editor-container" className="flex w-[410px] h-[100svh]">
+              <div
+                id="canvas-container"
+                className="w-full max-w-[410px] mx-auto sm:mx-0"
+              >
+                <Navbar />
+                <div className="w-full border border-black">
+                  <div className="p-2">
+                    <div
+                      id="canvas"
+                      ref={canvas}
+                      style={{
+                        backgroundColor: bg,
+                        height: `${canvasHeight}px`,
                       }}
+                      className="relative border border-black w-full max-w-[400px]"
                     >
-                      <div
-                        ref={pixelCanvas}
-                        className="absolute"
-                        onClick={() => setSelectedElement("pixelCanvas")}
-                      >
-                        <Handle show={showEditor} annoColor={annoColor} />
+                      {!firstTap && (
                         <div
-                          id="pixel-canvas"
-                          style={{ outlineColor: annoColor }}
-                          className={`flex ${
-                            selectedElement !== "pixelCanvas" && "hover:outline"
-                          }`}
+                          onClick={() => {
+                            setFirstTap(true);
+                            setShowEditor(true);
+                          }}
+                          className="absolute top-0 left-0 w-full h-full z-10"
+                        ></div>
+                      )}
+                      {showEditor && (
+                        <>
+                          <div className="absolute top-0 left-0 flex w-full h-full">
+                            <div
+                              style={{ borderColor: annoColor }}
+                              className="h-full w-1/2 border-r-[1px] border-dashed opacity-30"
+                            ></div>
+                          </div>
+                          <div className="absolute top-0 left-0 flex w-full h-full">
+                            <div
+                              style={{ borderColor: annoColor }}
+                              className="h-1/2 w-full border-b-[1px] border-dashed opacity-30"
+                            ></div>
+                          </div>
+                        </>
+                      )}
+                      {inputs.map((inp, i) => (
+                        <Draggable
+                          key={`text-${i}`}
+                          bounds="parent"
+                          handle=".handle"
+                          onDrag={(_, ui) => handleDragInputs(ui, i)}
+                          onStart={() => setSelectedElement(`text${i}`)}
+                          onStop={() => setDrawDisabled(false)}
+                          nodeRef={textNodesRefs[i]}
+                          position={{
+                            x: inp.x * canvasWidth,
+                            y: inp.y * canvasHeight,
+                          }}
                         >
-                          {bytes.map((_, i) => (
-                            <div key={`col-${i}`}>
-                              {Array.from({ length: 8 }).map((_, j) => (
-                                <div
-                                  key={`col-${j}`}
-                                  style={{
-                                    backgroundColor: bytes[i][j],
-                                    width: `${canvasWidth / 20}px`,
-                                    height: `${canvasWidth / 20}px`,
-                                    borderColor: annoColor + "aa",
-                                  }}
-                                  className={`${
-                                    showEditor &&
-                                    selectedElement === "pixelCanvas" &&
-                                    "border-[0.5px]"
-                                  } ${
-                                    !drawDisabled &&
-                                    selectedElement === "pixelCanvas" &&
-                                    "hover:border-2"
-                                  }`}
-                                  onClick={() => onPaint(i, j)}
-                                  onPointerMove={(e) =>
-                                    e.buttons === 1 && onPaint(i, j)
-                                  }
-                                ></div>
-                              ))}
-                            </div>
-                          ))}
-                        </div>
-                        {/* <div className="text-xs text-zinc-300">
+                          <div ref={textNodesRefs[i]} className="absolute">
+                            <Handle
+                              annoColor={annoColor}
+                              show={showEditor}
+                              isRemovable={true}
+                              onRemove={() => removeText(i)}
+                            />
+                            <input
+                              id={`input-${i}`}
+                              onFocus={() => setSelectedElement(`text${i}`)}
+                              style={{
+                                color: inp.color,
+                                width: inp.width,
+                                // With mono width fonts we can something like this
+                                // inp.value.length < 3
+                                //   ? "3ch"
+                                //   : `${inp.value.length}ch`,
+                                fontSize: `${canvasWidth / 20}px`,
+                                outlineWidth: "1px",
+                                outlineStyle:
+                                  showEditor && selectedElement === `text${i}`
+                                    ? "dashed"
+                                    : "none",
+                                outlineColor: annoColor,
+                              }}
+                              value={inp.value}
+                              className="bg-inherit"
+                              placeholder={`${showEditor ? "..." : ""}`}
+                              onChange={(e) => onChangeInput(e, i)}
+                            />
+                          </div>
+                        </Draggable>
+                      ))}
+
+                      <Draggable
+                        bounds="parent"
+                        nodeRef={pixelCanvas}
+                        handle=".handle"
+                        onDrag={handleDragPixelCanvas}
+                        onStart={() => setDrawDisabled(true)}
+                        onStop={() => setDrawDisabled(false)}
+                        position={{
+                          x: pixelCanvasPos.x * canvasWidth,
+                          y: pixelCanvasPos.y * canvasHeight,
+                        }}
+                      >
+                        <div
+                          ref={pixelCanvas}
+                          className="absolute"
+                          onClick={() => setSelectedElement("pixelCanvas")}
+                        >
+                          <Handle show={showEditor} annoColor={annoColor} />
+                          <div
+                            id="pixel-canvas"
+                            style={{ outlineColor: annoColor }}
+                            className={`flex ${
+                              selectedElement !== "pixelCanvas" &&
+                              "hover:outline"
+                            }`}
+                          >
+                            {bytes.map((_, i) => (
+                              <div key={`col-${i}`}>
+                                {Array.from({ length: 8 }).map((_, j) => (
+                                  <div
+                                    key={`col-${j}`}
+                                    style={{
+                                      backgroundColor: bytes[i][j],
+                                      width: `${canvasWidth / 20}px`,
+                                      height: `${canvasWidth / 20}px`,
+                                      borderColor: annoColor + "aa",
+                                    }}
+                                    className={`${
+                                      showEditor &&
+                                      selectedElement === "pixelCanvas" &&
+                                      "border-[0.5px]"
+                                    } ${
+                                      !drawDisabled &&
+                                      selectedElement === "pixelCanvas" &&
+                                      "hover:border-2"
+                                    }`}
+                                    onClick={() => onPaint(i, j)}
+                                    onPointerMove={(e) =>
+                                      e.buttons === 1 && onPaint(i, j)
+                                    }
+                                  ></div>
+                                ))}
+                              </div>
+                            ))}
+                          </div>
+                          {/* <div className="text-xs text-zinc-300">
                         {(pixelCanvasPos.x * canvasWidth).toFixed(0)},
                         {(pixelCanvasPos.y * canvasHeight).toFixed(0)}
                       </div> */}
-                      </div>
-                    </Draggable>
+                        </div>
+                      </Draggable>
+                    </div>
                   </div>
-                </div>
-                <div
-                  role="toolbar"
-                  aria-orientation="horizontal"
-                  className="px-2 pb-2 flex flex-wrap justify-between text-xs"
-                >
-                  <button
-                    className="border border-black px-2 hover:bg-blue-200"
-                    onClick={() => setShowEditor(!showEditor)}
+                  <div
+                    role="toolbar"
+                    aria-orientation="horizontal"
+                    className="px-2 pb-2 flex flex-wrap justify-between text-xs"
                   >
-                    {showEditor ? "Hide Editor" : "Show Editor"}
-                  </button>
+                    <button
+                      className="border border-black px-2 hover:bg-blue-200"
+                      onClick={() => setShowEditor(!showEditor)}
+                    >
+                      {showEditor ? "Hide Editor" : "Show Editor"}
+                    </button>
 
-                  <button
-                    disabled={inputs.length === 3}
-                    className="disabled:bg-white disabled:border-zinc-400 disabled:text-zinc-400 border border-black px-[6px] hover:bg-blue-200"
-                    onClick={addText}
-                  >
-                    + TEXT
-                  </button>
-                  <div>
                     <button
-                      onClick={() => setDrawMode("erase")}
-                      className={`${
-                        drawMode === "erase"
-                          ? "bg-[#0052ff] text-white"
-                          : "bg-white text-black hover:bg-blue-200"
-                      } border border-black px-[6px]`}
+                      disabled={inputs.length === 3}
+                      className="disabled:bg-white disabled:border-zinc-400 disabled:text-zinc-400 border border-black px-[6px] hover:bg-blue-200"
+                      onClick={addText}
                     >
-                      Erase
+                      + TEXT
                     </button>
-                    <button
-                      onClick={() => setDrawMode("paint")}
-                      className={`${
-                        drawMode === "paint"
-                          ? "bg-[#0052ff] text-white"
-                          : "bg-white text-black hover:bg-blue-200"
-                      } border border-black px-[6px]`}
-                    >
-                      Paint
-                    </button>
-                  </div>
-                  <div>
-                    {!warning && (
+                    <div>
                       <button
-                        className="border border-black px-2 hover:bg-rose-200 text-rose-500 border-rose-500"
-                        onClick={() => setWarning(true)}
+                        onClick={() => setDrawMode("erase")}
+                        className={`${
+                          drawMode === "erase"
+                            ? "bg-[#0052ff] text-white"
+                            : "bg-white text-black hover:bg-blue-200"
+                        } border border-black px-[6px]`}
                       >
-                        Clear
+                        Erase
                       </button>
-                    )}
-                    {warning && (
-                      <>
+                      <button
+                        onClick={() => setDrawMode("paint")}
+                        className={`${
+                          drawMode === "paint"
+                            ? "bg-[#0052ff] text-white"
+                            : "bg-white text-black hover:bg-blue-200"
+                        } border border-black px-[6px]`}
+                      >
+                        Paint
+                      </button>
+                    </div>
+                    <div>
+                      {!warning && (
                         <button
                           className="border border-black px-2 hover:bg-rose-200 text-rose-500 border-rose-500"
-                          onClick={() => {
-                            clear();
-                            setWarning(false);
-                          }}
+                          onClick={() => setWarning(true)}
                         >
-                          Sure!
+                          Clear
                         </button>
-                        <button
-                          className="border border-black px-2 hover:bg-blue-200 text-[#0052ff] border-[#0052ff]"
-                          onClick={() => setWarning(false)}
-                        >
-                          No!
-                        </button>
-                      </>
-                    )}
+                      )}
+                      {warning && (
+                        <>
+                          <button
+                            className="border border-black px-2 hover:bg-rose-200 text-rose-500 border-rose-500"
+                            onClick={() => {
+                              clear();
+                              setWarning(false);
+                            }}
+                          >
+                            Sure!
+                          </button>
+                          <button
+                            className="border border-black px-2 hover:bg-blue-200 text-[#0052ff] border-[#0052ff]"
+                            onClick={() => setWarning(false)}
+                          >
+                            No!
+                          </button>
+                        </>
+                      )}
+                    </div>
+                  </div>
+                  <div
+                    role="toolbar"
+                    aria-orientation="horizontal"
+                    className="px-2 text-xs py-2 border-t border-black flex flex-wrap justify-between text-sm"
+                  >
+                    <button
+                      className="border border-black px-2 w-1/2 hover:bg-blue-200"
+                      onClick={() => setShowPortfolio(true)}
+                    >
+                      My Inbox
+                    </button>
+
+                    <button
+                      className="w-1/2 disabled:bg-white disabled:border-zinc-400 disabled:text-zinc-400 border border-black px-[6px] hover:bg-blue-200"
+                      onClick={() => setShowLibModal(true)}
+                    >
+                      Library
+                    </button>
                   </div>
                 </div>
-                <div
-                  role="toolbar"
-                  aria-orientation="horizontal"
-                  className="px-2 text-xs py-2 border-t border-black flex flex-wrap justify-between text-sm"
-                >
+                <div className="border-x border-b border-black flex items-center justify-center p-2">
                   <button
-                    className="border border-black px-2 w-1/2 hover:bg-blue-200"
-                    onClick={() => setShowPortfolio(true)}
+                    className="w-full bg-[#0052FF] text-white flex justify-center p-2 hover:bg-[#0052FF]/80"
+                    onClick={() => setShowModal(true)}
                   >
-                    My Inbox
-                  </button>
-
-                  <button
-                    className="w-1/2 disabled:bg-white disabled:border-zinc-400 disabled:text-zinc-400 border border-black px-[6px] hover:bg-blue-200"
-                    onClick={() => setShowLibModal(true)}
-                  >
-                    Library
+                    POST to fren
                   </button>
                 </div>
+                <footer className="w-full">
+                  <Footer />
+                </footer>
               </div>
-              <div className="border-x border-b border-black flex items-center justify-center p-2">
-                <button
-                  className="w-full bg-[#0052FF] text-white flex justify-center p-2 hover:bg-[#0052FF]/80"
-                  onClick={() => setShowModal(true)}
-                >
-                  POST to fren
-                </button>
-              </div>
-              <footer className="w-full">
-                <Footer />
-              </footer>
             </div>
-          </div>
           </div>
           <div className="relative">
             <button
