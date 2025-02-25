@@ -1,4 +1,4 @@
-import FrameApp from "@/components/frame-app";
+import FrameAppWithWagmi from "@/components/frame-app-with-wagmi";
 
 const appUrl = process.env.NEXT_PUBLIC_URL;
 const imageUrl = `${appUrl}/frame-poster/fc.png`;
@@ -34,5 +34,5 @@ export async function generateMetadata() {
 }
 
 export default function Page() {
-  return <FrameApp />;
+  return <FrameAppWithWagmi />;
 }

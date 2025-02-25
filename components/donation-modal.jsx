@@ -13,7 +13,7 @@ import {
 
 import ConnectWalletBar from "./connect-wallet/connect-wallet-bar";
 
-export default function DonationModal({ show, onClose, isFrame }) {
+export default function DonationModal({ show, onClose, shouldSimulate }) {
   const {
     data: hash,
     error,
@@ -45,7 +45,7 @@ export default function DonationModal({ show, onClose, isFrame }) {
 
     const amount = parseEther(value, "wei");
     try {
-      if (!isFrame) {
+      if (shouldSimulate) {
         await simulateContract(config, {
           ...contract,
           functionName: "donateToDev",

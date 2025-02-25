@@ -8,6 +8,9 @@ dependencies:
   '@farcaster/frame-sdk':
     specifier: ^0.0.27
     version: 0.0.27
+  '@farcaster/frame-wagmi-connector':
+    specifier: ^0.0.16
+    version: 0.0.16(@farcaster/frame-sdk@0.0.27)(@wagmi/core@2.16.4)(viem@2.23.2)
   '@tanstack/react-query':
     specifier: ^5.66.0
     version: 5.66.0(react@18.3.1)
@@ -366,6 +369,18 @@ packages:
     transitivePeerDependencies:
       - typescript
       - zod
+    dev: false
+
+  /@farcaster/frame-wagmi-connector@0.0.16(@farcaster/frame-sdk@0.0.27)(@wagmi/core@2.16.4)(viem@2.23.2):
+    resolution: {integrity: sha512-9ymoD49f8mT7itHdZnnXWqt6MQKqaxG/1QzOr+0MBnSPL+BTBpbKFGCUMbhLdEE2XDool139oM5uMxlPEOOP2A==}
+    peerDependencies:
+      '@farcaster/frame-sdk': ^0.0.28
+      '@wagmi/core': ^2.14.1
+      viem: ^2.21.55
+    dependencies:
+      '@farcaster/frame-sdk': 0.0.27
+      '@wagmi/core': 2.16.4(react@18.3.1)(use-sync-external-store@1.4.0)(viem@2.23.2)
+      viem: 2.23.2
     dev: false
 
   /@img/sharp-darwin-arm64@0.33.5:

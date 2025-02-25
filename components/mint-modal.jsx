@@ -23,6 +23,7 @@ export default function MintModal({
   onClose,
   data,
   openDonationModal,
+  shouldSimulate,
   isFrame,
 }) {
   const { isConnected } = useAccount();
@@ -82,7 +83,7 @@ export default function MintModal({
     const functionParams = createMintArgs(wallet, name, data, eth, "0.0005");
 
     try {
-      if (!isFrame) {
+      if (shouldSimulate) {
         await simulateContract(config, {
           ...contract,
           functionName: "mintAndPost",
@@ -186,6 +187,7 @@ export default function MintModal({
         </div>
         <div className="w-full py-2 flex justify-center items-center">
           <Web3Button
+            isFrame={isFrame}
             disabled={isPending || !isConnected || isSimulating}
             onClick={() => mint()}
             // onClick={() => openDonationModal(true)}

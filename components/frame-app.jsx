@@ -12,7 +12,7 @@ const FramedBasedGift = dynamic(
 export default function FrameApp() {
   return (
     <main className="pixel-font h-[100svh]">
-      <FramedBasedGift />
+      <FramedBasedGift isFrame={true} />
     </main>
   );
 }

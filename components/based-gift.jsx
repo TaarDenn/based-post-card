@@ -16,7 +16,7 @@ const aspectRatio = 6 / 4;
 
 const dc = structuredClone(defaultCanvasReference);
 
-export default function BasedGift({ isFrame = false }) {
+export default function BasedGift({ isFrame = false, shouldSimulate = false }) {
   const [bytes, setBytes] = useState(dc.bytes);
   const [bg, setBg] = useState(dc.bg);
   const [brush, setBrush] = useState("#ffffff");
@@ -206,13 +206,14 @@ export default function BasedGift({ isFrame = false }) {
       <div className="w-full h-full">
         <MintModal
           isFrame={isFrame}
+          shouldSimulate={shouldSimulate}
           show={showModal}
           onClose={() => setShowModal(false)}
           data={{ bg, bytes, inputs, pixelCanvasPos }}
           openDonationModal={openDonationModal}
         />
         <DonationModal
-          isFrame={isFrame}
+          shouldSimulate={shouldSimulate}
           show={showDonationModal}
           onClose={() => setShowDonationModal(false)}
         />
@@ -233,7 +234,7 @@ export default function BasedGift({ isFrame = false }) {
                 id="canvas-container"
                 className="w-full max-w-[410px] mx-auto sm:mx-0"
               >
-                <Navbar />
+                <Navbar isFrame={isFrame} />
                 <div className="w-full border border-black">
                   <div className="p-2">
                     <div

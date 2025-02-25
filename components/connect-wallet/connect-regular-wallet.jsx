@@ -1,9 +1,41 @@
-import { useAccount, useSwitchChain, useChains } from "wagmi";
-
+import {
+  useAccount,
+  useSwitchChain,
+  useChains,
+  useConnect,
+  useDisconnect,
+  useEnsName,
+} from "wagmi";
 import { ConnectKitButton } from "connectkit";
-export default function ConnectRegularWallet() {
-  const { chainId } = useAccount();
+import { frameconfig } from "@/providers/wagmi-frame-provider";
+
+export default function ConnectRegularWallet({ isFrame = false }) {
+  const { chainId, address, isConnected } = useAccount();
   const chains = useChains();
+  const { connect } = useConnect();
+  const { disconnect } = useDisconnect();
+  const { data: ensName } = useEnsName(address);
+
+  // if (isFrame) {
+  //   return (
+  //     <div className="w-full h-full">
+  //       <button
+  //         className="border hover:bg-blue-200 border-black px-2 h-full w-full items-center justify-center flex"
+  //         onClick={() =>
+  //           isConnected
+  //             ? disconnect()
+  //             : connect({ connector: frameconfig.connectors[0] })
+  //         }
+  //       >
+  //         {!isConnected
+  //           ? "Connect"
+  //           : ensName
+  //           ? ensName
+  //           : address.slice(0, 4) + "..." + address.slice(-4)}
+  //       </button>
+  //     </div>
+  //   );
+  // }
 
   return (
     <div className="w-full h-full">
@@ -21,7 +53,7 @@ export default function ConnectRegularWallet() {
                 ? "Connect"
                 : ensName
                 ? ensName
-                : address.slice(0, 4) + "..." + address.slice(38, 42)}
+                : address.slice(0, 4) + "..." + address.slice(-4)}
             </button>
           );
         }}

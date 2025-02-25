@@ -1,11 +1,16 @@
 import { useChains, useAccount } from "wagmi";
 import ConnectWalletBar from "./connect-wallet/connect-wallet-bar";
 
-export default function Web3Button({ children, className, ...props }) {
+export default function Web3Button({
+  isFrame = false,
+  children,
+  className,
+  ...props
+}) {
   const chains = useChains();
   const { chainId, isConnected } = useAccount();
 
-  if (!isConnected) return <ConnectWalletBar />;
+  if (!isConnected) return <ConnectWalletBar isFrame={isFrame} />;
   if (chainId !== chains[0].id) return <ConnectWalletBar />;
 
   return (
