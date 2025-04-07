@@ -1,7 +1,12 @@
 // const font_sepolia = "0xEf3231434bF67a942c73A5721fC15798d1379616";
 // const contract_sepolia = "0x5F6dd5dADD6af656EdCdb94EDeBBBF6846F2Ef1d";
-export const font = "0xff70201bb6f40d900e7f733fd10f3f8934aa11e5";
+// https://emn178.github.io/online-tools/keccak_256.html
+// mintAndPost(address,string,bytes3,bytes4[8][8],string[3],bytes3[3],(uint256,uint256),(uint256,uint256)[3],uint256,uint256)
+// e4ab0c6c3bc7d8b9776b02ef5cd47b022cf36772356045f4cd630a20e881cffe
 
+// Craft your Based postcard with 8x8 pixel art tools! Post it as gift to any EVM address you want! Mange your inbox to see your received/sent postcards! Crafted with love and the new BasePixel font.
+// Craft your pixel postcard, Post it to a fren!
+export const font = "0xff70201bb6f40d900e7f733fd10f3f8934aa11e5";
 export const contract = {
   address: "0xe0d3063118116896a6906d4b6295EF0A34232A28",
   abi: [

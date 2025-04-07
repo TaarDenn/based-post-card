@@ -35,7 +35,7 @@ export const frameconfig = createConfig(
       farcasterFrame(),
       coinbaseWallet({
         appName: "PostCard",
-        preference: "smartWalletOnly",
+        preference: "all",
       }),
     ],
     walletConnectProjectId: process.env.NEXT_PUBLIC_WALLETCONNECT_PROJECT_ID,

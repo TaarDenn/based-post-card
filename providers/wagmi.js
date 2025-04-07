@@ -7,7 +7,7 @@ export const config = createConfig({
   connectors: [
     coinbaseWallet({
       appName: "PostCard",
-      preference: "smartWalletOnly",
+      preference: "all",
     }),
   ],
   transports: {

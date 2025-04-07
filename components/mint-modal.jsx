@@ -67,12 +67,10 @@ export default function MintModal({
       setSimulationError("Please enter your friend's EVM address");
       return;
     }
-
     if (eth === null || eth === undefined || eth.toString().trim() === "") {
       setSimulationError("Please enter the valid amount of ETH to send");
       return;
     }
-
     if (wallet.match(/0x[a-fA-F0-9]{40}/) === null) {
       setSimulationError("Please enter a valid EVM address");
       return;
@@ -132,6 +130,7 @@ export default function MintModal({
     }
   };
 
+  console.log(eth);
   return createPortal(
     <div className="pixel-font fixed top-0 left-0 w-full h-[100svh] overflow-y-auto bg-black/70 styled-scrollbar z-50 flex items-center jusitfy-center p-2">
       <div className="w-full max-w-[700px] mx-auto h-full bg-white border border-black p-2 flex flex-col items-center">
